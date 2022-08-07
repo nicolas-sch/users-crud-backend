@@ -26,7 +26,7 @@ app.put('/users/:id', (request, response) => {
 
     const updateUser = { id, name, age }
     
-    const index = users.findIndex( user => user.id === id)
+    const index = users.findIndex(user => user.id === id)
 
     if(index < 0) {
         return response.status(404).json({ message: "User Not Found"})
@@ -37,6 +37,19 @@ app.put('/users/:id', (request, response) => {
     return response.json(updateUser)
 })
 
+app.delete('/users/:id', (request, response) => {
+    const { id } = request.params
+
+    const index = users.findIndex(user => user.id ===id)
+
+    if(index < 0) {
+        return response.status(404).json({ message: "User Not Found"})
+    }
+
+    users.splice(index,1)
+
+    return response.status(204).json()
+})
 
 
 
